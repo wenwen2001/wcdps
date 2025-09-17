@@ -9,7 +9,7 @@
 git clone https://github.com/wenwen2001/wcdps.git
 cd wcdps
 python WCDPS/0_sino_recon_img.py
-\\\
+```
 ## Directory Structure
 ```bash
 WCDPS/
@@ -23,3 +23,4 @@ WCDPS/
    ├─ sde_lib.py
    ├─ utils.py
    └─ wcdps_utils.py
+```
