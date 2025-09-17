@@ -9,8 +9,8 @@
 git clone https://github.com/wenwen2001/wcdps.git
 cd wcdps
 python WCDPS/0_sino_recon_img.py
-
-# Directory Structure
+`\`\`\``
+## Directory Structure
 WCDPS/
 ├─ 0_sino_recon_img.py            # Example entry script
 └─ img_radon/
