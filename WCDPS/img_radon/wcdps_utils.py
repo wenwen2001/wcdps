@@ -10,7 +10,6 @@ from torch.utils.data import Dataset, DataLoader
 import re
 
 def natural_sort_key(s):
-    # 提取字符串中连续的数字，让排序按数字大小来排
     return [int(text) if text.isdigit() else text.lower()
             for text in re.split('(\d+)', str(s))]
 
@@ -53,12 +52,12 @@ def sampling_create_dataloader(configs,shuffle=False, sort=True,batch_size=10):
 
 def psnr_ssim(gt_arr, recon_arr):
     """
-    计算批次或单张图像的 PSNR 和 SSIM。
-    输入：
-        gt_arr: numpy 数组，形状为 [B, 1, H, W]、[1, H, W] 或 [H, W]
-        recon_arr: 同 gt_arr
-    返回：
-        psnr_list, ssim_list：若为批次输入，则为每一张图像的 PSNR 和 SSIM 列表；否则为标量。
+     PSNR  SSIM
+   
+        gt_arr: numpy [B, 1, H, W]、[1, H, W] or [H, W]
+        recon_arr:  gt_arr
+    return：
+        psnr_list, ssim_list：
     """
     def compute_single_psnr_ssim(gt, recon):
         mse = np.mean((gt - recon) ** 2)
@@ -85,7 +84,7 @@ def psnr_ssim(gt_arr, recon_arr):
         ssim = np.mean(ssim_map)
         return psnr, ssim
 
-    # 自动去掉 batch 和 channel 的维度
+    
     gt_arr = np.squeeze(gt_arr)
     recon_arr = np.squeeze(recon_arr)
 
@@ -164,9 +163,7 @@ class lambda_schedule_const(lambda_schedule):
 
 def data_consistency(x1,img,model,limit_view,niter,lamb=0.0001,save_root=None):
     """
-    img--np数组
-    如何使用的是原始la-sino,则gt对应的是原始的gt图像
-        如何使用的是原始'recon_sino',则gt对应的是正弦域重建的fbp图像
+    img--np
     lamb 表示TV正则化所占权重
     """
 
@@ -210,7 +207,7 @@ def data_consistency(x1,img,model,limit_view,niter,lamb=0.0001,save_root=None):
 
     callback = (odl.solvers.CallbackPrintIteration(step=10) &
                 odl.solvers.CallbackShow(step=10))
-    # Choose a starting point 这里记得改成扩散模型的输出！！step=10
+    # Choose a starting point 
     # x = L.domain.zero()
     # plt.imsave('./results/0-x.png', x.asarray(), cmap='gray')
     # Run the algorithm
