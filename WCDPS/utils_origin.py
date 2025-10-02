@@ -67,10 +67,7 @@ def img_normalized(img):
   return (img - np.min(img)) / (np.max(img) - np.min(img))
 def data_consistency(x1,img,model,limit_view,niter,lamb=0.0001):
     """
-    img--np数组
-    如何使用的是原始la-sino,则gt对应的是原始的gt图像
-        如何使用的是原始'recon_sino',则gt对应的是正弦域重建的fbp图像
-    lamb 表示TV正则化所占权重
+  
     """
     if model=='LACT':
         reco_space = odl.uniform_discr(
